@@ -4,8 +4,8 @@ import { Grid } from '@material-ui/core';
 import Product from "./Product/Product";
 
 const products = [
-    { id: 1, name: 'Shoes', description: 'Running shoes.', price: '$62.99' },
-    { id: 2, name: 'Macbook', description: 'Apple macbook.', price: '$62.99' },
+    { id: 1, name: 'Shoes', description: 'Running shoes.', price: '$62.99', image: "https://dummyimage.com/600x400/000/fff&text=running+shoes" },
+    { id: 2, name: 'Macbook', description: 'Apple macbook.', price: '$62.99', image: "https://dummyimage.com/600x400/000/fff&text=macbook" },
 ];
 
 const Products = () => {
