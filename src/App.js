@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { commerce } from './lib/commerce';
-import { Products, Navbar } from "./components";
+import { Products, Navbar, Cart } from "./components";
 
 const App = () => {
     const [products, setProducts] = useState([]);
@@ -21,6 +21,11 @@ const App = () => {
         setCart(item.cart);
     }
 
+    const handleEmptyCart = async () => {
+        const { succes, event, cart } = await commerce.cart.empty();
+        setCart(cart);
+    }
+
     useEffect(() => {
         fetchProducts();
         fetchCart();
@@ -29,7 +34,8 @@ const App = () => {
     return (
         <div>
             <Navbar totalItems={cart.total_items} />
-            <Products products={products} onAddToCart={handleAddToCart} />
+            {/* <Products products={products} onAddToCart={handleAddToCart} /> */}
+            <Cart cart={cart} onEmptyCart={handleEmptyCart} />
         </div>
     )
 }
