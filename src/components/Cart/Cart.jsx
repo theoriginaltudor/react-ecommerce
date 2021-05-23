@@ -2,13 +2,16 @@ import React from 'react'
 import { Container, Typography, Button, Grid } from "@material-ui/core";
 import CartItem from "./CartItem/CartItem";
 import useStyles from './styles';
+import { Link } from 'react-router-dom';
 
 const Cart = ({ cart, onEmptyCart }) => {
     const classes = useStyles();
     const isEmpty = !cart.total_items;
 
     const EmptyCart = () => (
-        <Typography variant='subtitle1'>You have no items in the cart, so start adding!</Typography>
+        <Typography variant='subtitle1'>You have no items in the cart,
+            <Link to='/' className={classes.link}> so start adding</Link>!
+        </Typography>
     );
 
     const FilledCart = () => (
@@ -52,7 +55,7 @@ const Cart = ({ cart, onEmptyCart }) => {
     return (
         <Container>
             <div className={classes.toolbar} />
-            <Typography className={classes.title} variant='h3'>Your Shopping Cart</Typography>
+            <Typography className={classes.title} variant='h3' gutterBottom>Your Shopping Cart</Typography>
             { isEmpty ? <EmptyCart /> : <FilledCart />}
         </Container>
     )
