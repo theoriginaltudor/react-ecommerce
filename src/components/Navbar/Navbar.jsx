@@ -1,6 +1,6 @@
 import React from 'react'
 import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from "@material-ui/core";
-import { LocalTaxiOutlined, ShoppingCart } from "@material-ui/icons";
+import { ShoppingCart } from "@material-ui/icons";
 import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../../assets/fff&text=logo.png';
