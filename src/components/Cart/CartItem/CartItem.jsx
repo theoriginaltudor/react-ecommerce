@@ -3,9 +3,9 @@ import { Typography, Button, Card, CardActions, CardContent, CardMedia } from "@
 
 import useStyles from "./styles";
 
-const CartItem = ({ item, onUpdateQty }) => {
+const CartItem = ({ item, onUpdateQty, onRemoveItem }) => {
     const classes = useStyles();
-
+    //TODO: on multiple updates, the system is slow and doesn't register all the clicks (look into react context)
     return (
         <Card>
             <CardMedia image={item.media.source} alt={item.name} className={classes.media} />
@@ -31,7 +31,14 @@ const CartItem = ({ item, onUpdateQty }) => {
                         +
                     </Button>
                 </div>
-                <Button variant='contained' type='button' color='secondary'>Remove</Button>
+                <Button
+                    variant='contained'
+                    type='button'
+                    color='secondary'
+                    onClick={() => onRemoveItem(item.id)}
+                >
+                    Remove
+                </Button>
             </CardActions>
         </Card>
     )
