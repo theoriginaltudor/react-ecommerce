@@ -13,7 +13,7 @@ const Checkout = ({ cart }) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
-    const [shippingdata, setShippingData] = useState({});
+    const [shippingData, setShippingData] = useState({});
     useEffect(() => {
         // cannot use async in useeffect so we created function inside and than call it
         const generateToken = async () => {
@@ -43,7 +43,7 @@ const Checkout = ({ cart }) => {
 
     const Form = () => activeStep === 0
         ? <AddressForm token={checkoutToken} next={next} />
-        : <PaymentForm />
+        : <PaymentForm shippingData={shippingData} token={checkoutToken} backStep={backStep} />
         ;
     return (
         <>
