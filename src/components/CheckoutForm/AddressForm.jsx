@@ -35,9 +35,8 @@ const AddressForm = ({ token }) => {
     };
 
     const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
-        const { shippingOptions } = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
+        const shippingOptions = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
 
-        console.log(shippingOptions);
         setShippingOptions(shippingOptions);
         setShippingOption(shippingOptions ? shippingOptions[0].id : '');
     };
@@ -94,7 +93,7 @@ const AddressForm = ({ token }) => {
                         />
                         <FormSelect label='Shipping Country' valuesList={countriesList} setValue={setShippingCountry} initialValue={shippingCountry} />
                         <FormSelect label='Shipping Subdivision' valuesList={subdivisionsList} setValue={setShippingSubdivision} initialValue={shippingSubdivision} />
-                        {/* <FormSelect label='Shipping Options' valuesList={optionsList} setValue={setShippingOption} initialValue={shippingOption} /> */}
+                        <FormSelect label='Shipping Options' valuesList={optionsList} setValue={setShippingOption} initialValue={shippingOption} />
                     </Grid>
                 </form>
             </FormProvider>
