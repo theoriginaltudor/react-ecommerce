@@ -1,5 +1,5 @@
 import React from 'react'
-import { InputLabel, Select, MenuItem, Button, Grid, Typography } from '@material-ui/core'
+import { InputLabel, Select, MenuItem, Grid } from '@material-ui/core'
 
 const FormSelect = ({ label, valuesList, setValue, initialValue }) => {
     return (
