@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Paper, Stepper, Step, StepLabel, Typography, CircularProgress, Divider, Button } from "@material-ui/core"
+import { Paper, Stepper, Step, StepLabel, Typography } from "@material-ui/core"
 
 import { commerce } from '../../../lib/commerce'
 
@@ -9,7 +9,7 @@ import PaymentForm from '../PaymentForm'
 
 const steps = ['Shipping address', 'Payment method'];
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, order, onCaptureCheckout, error }) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
@@ -19,7 +19,7 @@ const Checkout = ({ cart }) => {
         const generateToken = async () => {
             try {
                 const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
-
+                console.log('Token is:', token);
                 setCheckoutToken(token);
             } catch (error) {
                 console.log('Generate token error', error);
@@ -43,7 +43,13 @@ const Checkout = ({ cart }) => {
 
     const Form = () => activeStep === 0
         ? <AddressForm token={checkoutToken} next={next} />
-        : <PaymentForm shippingData={shippingData} token={checkoutToken} backStep={backStep} />
+        : <PaymentForm
+            shippingData={shippingData}
+            token={checkoutToken}
+            backStep={backStep}
+            onCaptureCheckout={onCaptureCheckout}
+            nextStep={nextStep}
+        />
         ;
     return (
         <>

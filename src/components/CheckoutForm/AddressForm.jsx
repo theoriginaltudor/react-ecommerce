@@ -35,26 +35,26 @@ const AddressForm = ({ token, next }) => {
     };
 
     const fetchShippingOptions = async (checkoutTokenId, country, region = null) => {
-        const shippingOptions = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
+        const shippingOptionsResponse = await commerce.checkout.getShippingOptions(checkoutTokenId, { country, region });
 
-        setShippingOptions(shippingOptions);
-        setShippingOption(shippingOptions ? shippingOptions[0].id : '');
+        setShippingOptions(shippingOptionsResponse);
+        setShippingOption(shippingOptionsResponse ? shippingOptionsResponse[0].id : '');
     };
 
     useEffect(() => {
         fetchShippingCountries(token.id);
-    }, []);
+    }, [token.id]);
 
     useEffect(() => {
         if (shippingCountry)
             fetchSubdivisions(token.id, shippingCountry);
-    }, [shippingCountry]);
+    }, [token.id, shippingCountry]);
 
     useEffect(() => {
         if (shippingSubdivision)
             fetchShippingOptions(token.id, shippingCountry, shippingSubdivision);
 
-    }, [shippingSubdivision])
+    }, [token.id, shippingCountry, shippingSubdivision])
     return (
         <>
             <Typography variant='h6' gutterBottom> Shipping Address </Typography>
@@ -91,9 +91,24 @@ const AddressForm = ({ token, next }) => {
                             name='zip'
                             label='Zip'
                         />
-                        <FormSelect label='Shipping Country' valuesList={countriesList} setValue={setShippingCountry} initialValue={shippingCountry} />
-                        <FormSelect label='Shipping Subdivision' valuesList={subdivisionsList} setValue={setShippingSubdivision} initialValue={shippingSubdivision} />
-                        <FormSelect label='Shipping Options' valuesList={optionsList} setValue={setShippingOption} initialValue={shippingOption} />
+                        <FormSelect
+                            label='Shipping Country'
+                            valuesList={countriesList}
+                            setValue={setShippingCountry}
+                            initialValue={shippingCountry}
+                        />
+                        <FormSelect
+                            label='Shipping Subdivision'
+                            valuesList={subdivisionsList}
+                            setValue={setShippingSubdivision}
+                            initialValue={shippingSubdivision}
+                        />
+                        <FormSelect
+                            label='Shipping Options'
+                            valuesList={optionsList}
+                            setValue={setShippingOption}
+                            initialValue={shippingOption}
+                        />
                     </Grid>
                     <br />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
